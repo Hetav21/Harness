@@ -1,0 +1,46 @@
+schema-version: 1
+template:
+  repository: owner/agent-workspace-template
+  release: v0.1.0
+installed:
+  clients:
+    - id: claude-code
+      adapter-version: 1
+      capabilities: [skills, relative-skill-links]
+    - id: codex
+      adapter-version: 1
+      capabilities: [skills]
+    - id: opencode
+      adapter-version: 1
+      capabilities: [skills, mcp]
+    - id: antigravity
+      adapter-version: 1
+      capabilities: [skills]
+  modules:
+    - id: workspace-router
+      source-release: v0.1.0
+outputs:
+  - path: AGENTS.md
+    owner: shared-core
+    content-hash: sha256:0000000000000000000000000000000000000000000000000000000000000000
+    update-policy: merge
+  - path: .agents/skills/workspace-router/SKILL.md
+    owner: shared-core
+    content-hash: sha256:1111111111111111111111111111111111111111111111111111111111111111
+    update-policy: replace-if-unmodified
+  - path: .claude/skills/workspace-router
+    owner: claude-code-adapter
+    link-target: ../../.agents/skills/workspace-router
+    update-policy: replace-link-if-unmodified
+project-context: .agent-template/project-context.md
+applied-migrations: []
+warnings: []
+validation:
+  - id: manifest-schema
+    status: passed
+    evidence: core/manifest/manifest.example.yaml
+    result: Manifest conforms to the declared schema.
+  - id: live-client-diagnostics
+    status: skipped
+    command: client-native diagnostics
+    result: No authenticated client session was requested.

@@ -1,0 +1,34 @@
+schema-version: 1
+id: antigravity
+display-name: Antigravity
+supported-template-major: 0
+instructions:
+  entrypoint: AGENTS.md
+  optional-shim: GEMINI.md only when a selected workflow needs it
+skills:
+  canonical: .agents/skills
+  bridge: direct
+capabilities:
+  outputs:
+    - .agents/rules/
+    - .agents/agents/ROLE_NAME/
+    - .agents/mcp_config.json
+    - .agents/hooks.json
+    - .agents/plugins/
+  statuses:
+    skills: supported
+    mcp: conditional
+    hooks: conditional
+    plugins: conditional
+  role-metadata: purpose, scope, inputs, outputs, validation ownership, escalation conditions
+  mcp: inert example only; use environment-variable names, never credentials
+validation:
+  offline:
+    - agy --help
+    - agy plugin list (optional when the local profile is initialized)
+  live:
+    - /skills
+    - /agents
+    - /mcp
+    - /hooks
+    - agy -p with an authenticated model session

@@ -1,0 +1,8 @@
+# Project-safe Codex settings example. No credentials are included.
+[project]
+skills = ".agents/skills"
+
+[mcp.example]
+enabled = false
+command = "${MCP_COMMAND}"
+args = ["${MCP_ARGUMENT}"]

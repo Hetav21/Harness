@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent workspace manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema-version", "template", "installed", "outputs", "project-context", "applied-migrations", "warnings", "validation"],
+  "properties": {
+    "schema-version": { "const": 1 },
+    "template": {
+      "type": "object", "additionalProperties": false, "required": ["repository", "release"],
+      "properties": { "repository": { "type": "string", "minLength": 1 }, "release": { "type": "string", "pattern": "^v\\d+\\.\\d+\\.\\d+$" } }
+    },
+    "installed": {
+      "type": "object", "additionalProperties": false, "required": ["clients", "modules"],
+      "properties": {
+        "clients": { "type": "array", "items": {
+          "type": "object", "additionalProperties": false, "required": ["id", "adapter-version"],
+          "properties": { "id": { "type": "string", "minLength": 1 }, "adapter-version": { "oneOf": [{ "type": "string", "minLength": 1 }, { "type": "integer", "minimum": 1 }] }, "capabilities": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } } }
+        } },
+        "modules": { "type": "array", "items": {
+          "type": "object", "additionalProperties": false, "required": ["id", "source-release"],
+          "properties": { "id": { "type": "string", "minLength": 1 }, "source-release": { "type": "string", "pattern": "^v\\d+\\.\\d+\\.\\d+$" } }
+        } }
+      }
+    },
+    "outputs": { "type": "array", "items": {
+      "type": "object", "additionalProperties": false, "required": ["path", "owner", "update-policy"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$)).+" }, "owner": { "type": "string", "minLength": 1 },
+        "update-policy": { "type": "string", "enum": ["replace-if-unmodified", "replace-link-if-unmodified", "merge", "user-owned", "remove-if-unmodified"] },
+        "content-hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }, "link-target": { "type": "string", "pattern": "^(?!/)(?![A-Za-z]:).+" }
+      },
+      "oneOf": [
+        { "required": ["content-hash"], "not": { "required": ["link-target"], "properties": { "link-target": {} } }, "properties": { "content-hash": {}, "update-policy": { "enum": ["replace-if-unmodified", "merge", "user-owned", "remove-if-unmodified"] }, "link-target": {} } },
+        { "required": ["link-target", "update-policy"], "not": { "required": ["content-hash"], "properties": { "content-hash": {} } }, "properties": { "update-policy": { "const": "replace-link-if-unmodified" }, "content-hash": {} } }
+      ]
+    } },
+    "project-context": { "type": "string", "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$)).+" },
+    "applied-migrations": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "validation": { "type": "array", "minItems": 1, "items": {
+      "type": "object", "additionalProperties": false, "required": ["id", "status", "result"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 }, "status": { "type": "string", "enum": ["passed", "failed", "skipped", "blocked"] },
+        "evidence": { "type": "string", "minLength": 1 }, "command": { "type": "string", "minLength": 1 },
+        "result": { "type": "string", "minLength": 1 }, "detail": { "type": "string", "minLength": 1 }
+      }
+    } },
+    "upgrade": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": { "type": "string", "enum": ["idle", "active", "interrupted"] },
+        "from-release": { "type": "string", "pattern": "^v\\d+\\.\\d+\\.\\d+$" },
+        "to-release": { "type": "string", "pattern": "^v\\d+\\.\\d+\\.\\d+$" },
+        "detail": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

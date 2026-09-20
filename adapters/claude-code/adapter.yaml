@@ -1,0 +1,38 @@
+schema-version: 1
+id: claude-code
+display-name: Claude Code
+supported-template-major: 0
+instructions:
+  entrypoint: CLAUDE.md
+  import: "@AGENTS.md"
+skills:
+  canonical: .agents/skills
+  bridge: relative
+  bridge-path: .claude/skills
+  discovery-note: Symlink discovery is filesystem-dependent and is not guaranteed by official Claude Code documentation.
+capabilities:
+  outputs:
+    - .claude/agents/
+    - .claude/rules/
+    - .mcp.json
+    - .claude/settings.json
+  statuses:
+    skills: supported
+    relative-skill-links: conditional
+    mcp: conditional
+    hooks: conditional
+  role-metadata: purpose, scope, inputs, outputs, validation ownership, escalation conditions
+  mcp: inert example only; enable explicitly with environment-variable configuration
+validation:
+  offline:
+    - claude --version
+    - claude --help
+    - filesystem resolution of relative skill links
+  live:
+    - /context
+    - /memory
+    - /skills
+    - /agents
+    - /hooks
+    - /mcp
+  live-note: Authenticated live /skills validation is required to confirm symlink discovery when available.

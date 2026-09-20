@@ -1,0 +1,19 @@
+---
+name: {{ROLE_NAME}}
+description: {{ROLE_DESCRIPTION}}
+---
+
+# {{ROLE_NAME}}
+
+## Purpose
+{{PURPOSE}}
+## Scope
+{{SCOPE}}
+## Inputs
+{{INPUTS}}
+## Outputs
+{{OUTPUTS}}
+## Validation ownership
+{{VALIDATION_OWNERSHIP}}
+## Escalation conditions
+{{ESCALATION_CONDITIONS}}

@@ -1,0 +1,124 @@
+# Project Context Worksheet
+
+This worksheet is inert source material for an adopter to complete. It is not executable guidance, configuration, or permission to write. Delete unused rows, verify every referenced path exists, and never replace missing evidence with assumptions.
+
+## Product and Ownership
+
+| Field | Value | Evidence type | Confidence | Freshness / authority policy |
+|---|---|---|---|---|
+| Product or service | {{PRODUCT_NAME}} | {{EVIDENCE_TYPE}} | {{CONFIDENCE}} | {{FRESHNESS_POLICY}} / {{AUTHORITY_POLICY}} |
+| Owner | {{PRODUCT_OWNER}} | {{EVIDENCE_TYPE}} | {{CONFIDENCE}} | {{FRESHNESS_POLICY}} / {{AUTHORITY_POLICY}} |
+| Responsibility boundary | {{RESPONSIBILITY}} | {{EVIDENCE_TYPE}} | {{CONFIDENCE}} | {{FRESHNESS_POLICY}} / {{AUTHORITY_POLICY}} |
+| Last verified | {{LAST_VERIFIED_DATE}} | {{EVIDENCE_TYPE}} | {{CONFIDENCE}} | {{FRESHNESS_POLICY}} / {{AUTHORITY_POLICY}} |
+
+## Ownership
+
+Record scope and precedence for each governing instruction, owner, and responsibility boundary.
+
+## Repositories
+
+| Repository path | Owner | Responsibility | Evidence path | Evidence type | Last verified | Confidence |
+|---|---|---|---|---|---|---|
+| {{REPOSITORY_PATH}} | {{REPOSITORY_OWNER}} | {{RESPONSIBILITY}} | {{EVIDENCE_PATH}} | {{EVIDENCE_TYPE}} | {{LAST_VERIFIED_DATE}} | {{CONFIDENCE}} |
+
+Record only repositories confirmed to exist. Remove unused rows and distinguish code-backed, runtime-observed, documentation-backed, human-provided, convention, and unknown evidence.
+
+## Runnable and Context-Only Code
+
+| Repository path | Classification | Runnable entry point | Responsibility | Evidence path / type | Last verified | Confidence |
+|---|---|---|---|---|---|---|
+| {{REPOSITORY_PATH}} | {{RUNNABLE_OR_CONTEXT_ONLY}} | {{RUNNABLE_ENTRY_POINT}} | {{RESPONSIBILITY}} | {{EVIDENCE_PATH}} / {{EVIDENCE_TYPE}} | {{LAST_VERIFIED_DATE}} | {{CONFIDENCE}} |
+
+## Dependencies
+
+## Shared Dependencies
+
+| Dependency | Provider | Consumers | Contract or responsibility | Environment | Evidence path / type | Last verified | Confidence |
+|---|---|---|---|---|---|---|---|
+| {{DEPENDENCY_NAME}} | {{DEPENDENCY_PROVIDER}} | {{DEPENDENCY_CONSUMERS}} | {{RESPONSIBILITY}} | {{ENVIRONMENT}} | {{EVIDENCE_PATH}} / {{EVIDENCE_TYPE}} | {{LAST_VERIFIED_DATE}} | {{CONFIDENCE}} |
+
+## Local Setup and Run Commands
+
+| Repository path | Setup command | Run command | Verification command | Environment | Evidence path / type | Last verified | Confidence |
+|---|---|---|---|---|---|---|---|
+| {{REPOSITORY_PATH}} | {{SETUP_COMMAND}} | {{RUN_COMMAND}} | {{VERIFICATION_COMMAND}} | {{ENVIRONMENT}} | {{EVIDENCE_PATH}} / {{EVIDENCE_TYPE}} | {{LAST_VERIFIED_DATE}} | {{CONFIDENCE}} |
+
+Commands must be copied from authoritative project evidence. If a command is not verified, record unknown rather than inventing a substitute.
+
+## CI/CD
+
+| Repository or pipeline | Trigger | Checks or artifacts | Evidence path / type | Last verified | Confidence |
+|---|---|---|---|---|---|
+| {{PIPELINE}} | {{TRIGGER}} | {{CHECKS_OR_ARTIFACTS}} | {{EVIDENCE_PATH}} / {{EVIDENCE_TYPE}} | {{LAST_VERIFIED_DATE}} | {{CONFIDENCE}} |
+
+## Deployment
+
+| Component | Environment | Runtime or deployment relationship | Evidence path / type | Last verified | Confidence |
+|---|---|---|---|---|---|
+| {{COMPONENT_NAME}} | {{ENVIRONMENT}} | {{RUNTIME_DEPLOYMENT_RELATIONSHIP}} | {{EVIDENCE_PATH}} / {{EVIDENCE_TYPE}} | {{LAST_VERIFIED_DATE}} | {{CONFIDENCE}} |
+
+## Runtime and Deployment Wiring
+
+| Component | Environment | Runtime or deployment relationship | Evidence path / type | Last verified | Confidence |
+|---|---|---|---|---|---|
+| {{COMPONENT_NAME}} | {{ENVIRONMENT}} | {{RUNTIME_DEPLOYMENT_RELATIONSHIP}} | {{EVIDENCE_PATH}} / {{EVIDENCE_TYPE}} | {{LAST_VERIFIED_DATE}} | {{CONFIDENCE}} |
+
+## Observability
+
+| Component | Logs, metrics, or traces | Access boundary | Evidence path / type | Last verified | Confidence |
+|---|---|---|---|---|---|
+| {{COMPONENT_NAME}} | {{OBSERVABILITY_SIGNALS}} | {{ACCESS_BOUNDARY}} | {{EVIDENCE_PATH}} / {{EVIDENCE_TYPE}} | {{LAST_VERIFIED_DATE}} | {{CONFIDENCE}} |
+
+## External Systems
+
+| System | Purpose | Consumer or owner | Environment | Evidence path / type | Last verified | Confidence |
+|---|---|---|---|---|---|---|
+| {{EXTERNAL_SYSTEM}} | {{SYSTEM_PURPOSE}} | {{SYSTEM_OWNER_OR_CONSUMER}} | {{ENVIRONMENT}} | {{EVIDENCE_PATH}} / {{EVIDENCE_TYPE}} | {{LAST_VERIFIED_DATE}} | {{CONFIDENCE}} |
+
+Do not record endpoints, profiles, credentials, or other sensitive details here. Link to an approved authoritative source when appropriate.
+
+## Authentication
+
+## Authentication Boundaries
+
+| Boundary | Human action required | Agent-readable evidence | Prohibited handling | Authority / freshness policy |
+|---|---|---|---|---|
+| {{AUTHENTICATION_BOUNDARY}} | {{HUMAN_AUTH_ACTION}} | {{EVIDENCE_PATH_OR_UNKNOWN}} | {{PROHIBITED_HANDLING}} | {{AUTHORITY_POLICY}} / {{FRESHNESS_POLICY}} |
+
+Authentication is human-controlled. Never inspect, request, copy, or expose cached credential material; stop and hand off when login, MFA, SSO, role selection, or token refresh is required.
+
+## Evidence
+
+## Evidence and Confidence
+
+| Evidence path | Evidence type | Claim supported | Last verified | Confidence | Freshness policy | Authority policy |
+|---|---|---|---|---|---|---|
+| {{EVIDENCE_PATH}} | {{EVIDENCE_TYPE}} | {{EVIDENCE_CLAIM}} | {{LAST_VERIFIED_DATE}} | {{CONFIDENCE}} | {{FRESHNESS_POLICY}} | {{AUTHORITY_POLICY}} |
+
+Allowed evidence types are code-backed, runtime-observed, documentation-backed, human-provided, convention, and unknown. Preserve the distinction. Missing or stale evidence remains unknown until verified.
+
+## Assumptions
+
+| Assumption | Why it is currently used | Evidence needed | Owner | Status |
+|---|---|---|---|---|
+| {{ASSUMPTION}} | {{RATIONALE}} | {{EVIDENCE_NEEDED}} | {{OWNER}} | {{OPEN_OR_RESOLVED}} |
+
+## Contradictions
+
+| Conflicting claims | Sources | Impact | Resolution owner | Status |
+|---|---|---|---|---|
+| {{CONFLICTING_CLAIMS}} | {{SOURCES}} | {{IMPACT}} | {{OWNER}} | {{OPEN_OR_RESOLVED}} |
+
+## Unknowns
+
+| Unknown | Why it matters | Evidence or question needed | Owner | Status |
+|---|---|---|---|---|
+| {{UNKNOWN}} | {{IMPACT}} | {{EVIDENCE_OR_QUESTION}} | {{OWNER}} | {{OPEN_OR_RESOLVED}} |
+
+## Skill Routing Plan
+
+| Task or trigger | Related skill | Repository or path scope | Evidence path / type | Last verified | Confidence |
+|---|---|---|---|---|---|
+| {{TASK_TRIGGER}} | {{RELATED_SKILL}} | {{SKILL_SCOPE}} | {{EVIDENCE_PATH}} / {{EVIDENCE_TYPE}} | {{LAST_VERIFIED_DATE}} | {{CONFIDENCE}} |
+
+Route only to skills that exist at the referenced path. Record freshness and authority for routing claims, and leave unresolved architecture or ownership as unknown.

@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "example": {
+      "enabled": false,
+      "command": "${MCP_COMMAND}",
+      "args": ["${MCP_ARGUMENT}"]
+    }
+  }
+}

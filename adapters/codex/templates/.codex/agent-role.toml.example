@@ -1,0 +1,8 @@
+# Neutral role contract mapped to Codex metadata.
+name = "{{ROLE_NAME}}"
+purpose = "{{PURPOSE}}"
+scope = "{{SCOPE}}"
+inputs = "{{INPUTS}}"
+outputs = "{{OUTPUTS}}"
+validation_ownership = "{{VALIDATION_OWNERSHIP}}"
+escalation_conditions = "{{ESCALATION_CONDITIONS}}"
