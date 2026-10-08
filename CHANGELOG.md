@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented here.
 
+## 0.2.0 - 2026-10-09
+
+- Added a manifest-based update handoff to generated `AGENTS.md` so the starter checkout can be removed without losing upgrade discovery.
+- Added manifest schema version 2 with a required source commit and verified clone-URL guidance; the validator retains support for version 1 manifests.
+- Added source retrieval and identity checks to the upgrade flow, plus a migration preserving existing workspace instructions and ownership.
+- Required verification of retained provenance and instruction paths before starter removal; no separate update guide is generated.
+
 ## 0.1.1 - 2026-10-09
 
 - Strengthened shared engineering guidance for readability, minimal diffs, necessary complexity, proper fixes, and explained workarounds.

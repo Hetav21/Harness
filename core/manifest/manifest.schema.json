@@ -5,10 +5,14 @@
   "additionalProperties": false,
   "required": ["schema-version", "template", "installed", "outputs", "project-context", "applied-migrations", "warnings", "validation"],
   "properties": {
-    "schema-version": { "const": 1 },
+    "schema-version": { "enum": [1, 2] },
     "template": {
       "type": "object", "additionalProperties": false, "required": ["repository", "release"],
-      "properties": { "repository": { "type": "string", "minLength": 1 }, "release": { "type": "string", "pattern": "^v\\d+\\.\\d+\\.\\d+$" } }
+      "properties": {
+        "repository": { "type": "string", "minLength": 1 },
+        "release": { "type": "string", "pattern": "^v\\d+\\.\\d+\\.\\d+$" },
+        "commit": { "type": "string", "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$" }
+      }
     },
     "installed": {
       "type": "object", "additionalProperties": false, "required": ["clients", "modules"],
@@ -56,5 +60,10 @@
         "detail": { "type": "string", "minLength": 1 }
       }
     }
-  }
+  },
+  "allOf": [{
+    "if": { "properties": { "schema-version": { "const": 2 } } },
+    "then": { "properties": { "template": { "required": ["commit"] } } },
+    "else": { "properties": { "template": { "not": { "required": ["commit"] } } } }
+  }]
 }

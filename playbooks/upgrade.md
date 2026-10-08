@@ -9,6 +9,23 @@ credentials. Authentication remains human-controlled; when a required authentica
 The manifest is the ownership record. A path is managed only when the manifest
 identifies its owner, update policy, and content hash or link target. Unmanaged files are not adopted, overwritten, or removed by this playbook.
 
+## Source retrieval
+
+The generated workspace `AGENTS.md` directs update requests to the retained
+`.agent-template/manifest.yaml`. Use its `template.repository` to retrieve a
+target tagged release into a temporary directory outside managed output paths;
+the original starter checkout is not required. If no target was specified,
+inspect release tags and include the proposed target in the approval plan.
+Never silently substitute the repository's default branch for a release.
+
+Verify the target tag, full commit ID, and matching `VERSION`, then use that
+checkout's upgrade playbook, schema, and migrations. Verify that the installed
+release tag still resolves to `template.commit` when recorded; a mismatch
+blocks the upgrade. For a legacy manifest containing only an ambiguous
+repository shorthand, obtain a verified clone URL from the user or retained
+evidence rather than guessing a host. Missing source access or authentication
+blocks retrieval and must be reported without changing the workspace.
+
 ## Manifest read
 
 Read `.agent-template/manifest.yaml` and validate its schema before reading or
@@ -17,6 +34,11 @@ modules, output ownership, policies, hashes/link targets, warnings, and applied
 migrations. A missing, malformed, or ambiguous manifest stops the upgrade and
 produces a rollback report without changing files. Preserve any pre-existing
 partial-run marker and its recorded backup location.
+
+The target schema accepts legacy version 1 and current version 2 manifests.
+Version 2 requires `template.commit`; version 1 does not prove the original
+source commit. Do not invent that historical value. The migration records the
+verified target commit only after the approved upgrade succeeds.
 
 ## Release range resolution
 
@@ -114,7 +136,8 @@ check prevents completion and triggers rollback handling.
 ## Manifest update
 
 Only after validation, and only after all required validation passes, update the manifest atomically with
-the new template release, current hashes/link targets, warnings, selected
+schema version 2, the verified source clone URL, target release and full commit,
+current hashes/link targets, warnings, selected
 clients/modules, and applied migration IDs. Retain conflict, skipped, and
 blocked warnings; do not convert them to passes. If validation fails, leave the
 old release, hashes, warnings, and migration history authoritative and do not

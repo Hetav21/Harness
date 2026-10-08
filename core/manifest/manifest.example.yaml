@@ -1,7 +1,9 @@
-schema-version: 1
+# Inert example: replace the repository, commit, and content hashes with verified values.
+schema-version: 2
 template:
-  repository: owner/agent-workspace-template
-  release: v0.1.1
+  repository: https://example.org/owner/agent-workspace-template.git
+  release: v0.2.0
+  commit: "0000000000000000000000000000000000000000"
 installed:
   clients:
     - id: claude-code
@@ -18,7 +20,7 @@ installed:
       capabilities: [skills]
   modules:
     - id: workspace-router
-      source-release: v0.1.1
+      source-release: v0.2.0
 outputs:
   - path: AGENTS.md
     owner: shared-core

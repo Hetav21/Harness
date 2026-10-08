@@ -27,6 +27,12 @@ Get explicit user approval immediately before file changes.
 3. Check for a starter source checkout, existing project context, and manifest.
    Do not inspect cached credentials, token stores, private keys, or secret
    values. Authentication remains under human control.
+4. Verify the starter's credential-free repository clone URL, release tag, and
+   full commit ID from ordinary source metadata. The tag must match `VERSION`
+   and resolve to the clean source used for generation. For copied sources,
+   obtain equivalent provenance evidence; do not guess the origin or treat
+   locally modified source as an official release. Missing or ambiguous source
+   provenance blocks materialization.
 
 **Required output:** a preflight inventory with detected clients, candidate
    files, dirty/unmanaged classifications, and a list of unavailable checks.
@@ -134,6 +140,25 @@ selected. Do not copy the distribution's bootstrap or release-maintenance
 instructions into project policy, or leave links that depend on retaining the
 starter checkout. Record the selected source modules and output ownership.
 
+Plan this lifecycle section in the generated shared `AGENTS.md`, pointing to
+the manifest at the workspace root. Include both files in the approved output
+plan and preserve any unmanaged entrypoint. Keep repository and version values
+in the manifest rather than duplicating them in the instructions:
+
+```markdown
+## Harness updates
+
+When asked to update Harness-generated instructions, read
+`.agent-template/manifest.yaml` to identify the source repository and installed
+release/commit. Retrieve the target tagged release into a temporary directory,
+then follow its `playbooks/upgrade.md` and applicable migrations. Preserve
+project-specific changes and present the proposed update before applying it.
+```
+
+Do not generate a separate update guide. The retained manifest and this section
+must be sufficient to locate the upstream upgrade procedure after the starter
+checkout is removed.
+
 **Required output:** the completed table, conflict decisions, selected-only
    source list, and predicted manifest entries. Existing unmanaged files must
    remain explicitly untouched; they cannot be overwritten or adopted silently.
@@ -184,6 +209,10 @@ Run offline checks first: source portability, frontmatter/config syntax,
 Check that generated instruction entrypoints contain the selected policy and
 that their required imports and links resolve within the retained workspace,
 independently of the starter checkout.
+Verify that the Harness updates section points to the retained manifest and
+that its recorded origin and tag/commit can locate `playbooks/upgrade.md`.
+If source retrieval is unavailable, report it as blocked rather than claiming
+the workspace is ready for starter removal.
 
 Report each check as exactly one of **passed**, **failed**, **skipped**, or
    **blocked**, with command/evidence and result. Missing client binaries or an
@@ -202,7 +231,9 @@ Skipped checks are not passed.
 ## Manifest
 
 Write `.agent-template/manifest.yaml` only after required validation completes.
-   Record the template release, selected clients and capabilities, source
+   Use schema version 2. Record the verified credential-free clone URL in
+   `template.repository`, the tag in `template.release`, and the full commit ID
+   in `template.commit`. Record selected clients and capabilities, source
    modules, output owners, update policies, content hashes/link targets,
    project-context reference, applied migrations, validation results, warnings,
    skips, and blocks. Do not claim skipped or blocked checks as passed.
@@ -219,6 +250,10 @@ Report generated paths, preserved files, manifest location, validation status,
    warnings, and remaining human actions. The starter source repository may be
    removed only after successful bootstrap and only with explicit approval; the
    generated `.agent-template/manifest.yaml` and project context must remain.
+   Keep them and the generated instructions outside the removable checkout;
+   verify their retained paths and the manifest-based update handoff before
+   deletion. Retain them in the project's chosen version-controlled workspace
+   configuration so a fresh agent or checkout can discover the same origin.
    If validation was skipped or blocked, say so plainly and identify the human
    action needed. Do not report an incomplete bootstrap as successful.
 

@@ -74,24 +74,33 @@ verified in an authenticated user session when that check is requested.
 ## Generated workspace state
 
 The generated workspace retains `.agent-template/manifest.yaml` and the project
-context. The manifest records the release, selected clients and capabilities,
+context. The manifest records the source repository clone URL, release tag,
+exact source commit, selected clients and capabilities,
 source modules, ownership, hashes or link targets, migrations, warnings, and
 validation results. It must retain skipped and blocked checks rather than
 calling them passed.
 
 After a successful bootstrap, the starter source repository may optionally be
 removed, but only with explicit approval. The generated manifest and project
-context must remain. Future maintenance uses the manifest and the upgrade
-playbook rather than silently re-running bootstrap.
+context must remain outside that checkout, alongside the generated instructions.
+The generated `AGENTS.md` includes a Harness updates section pointing to the
+manifest. Keep these files in the project's version-controlled workspace
+configuration. No separate update guide or permanent Harness clone is needed.
 
 ## Upgrade from a later release
 
-When a later tagged release is available, read the
-[upgrade playbook](playbooks/upgrade.md), the target release migrations, and
-the retained manifest. The agent resolves the contiguous migration range,
+Ask the agent to update the Harness-generated instructions. It reads the
+retained manifest, retrieves a target tagged release from the recorded origin
+into a temporary directory, and follows that release's
+[upgrade playbook](playbooks/upgrade.md) and migrations. The agent verifies the
+source identity and resolves the contiguous migration range,
 classifies managed and unmanaged changes, presents a new complete plan, and
 waits for explicit approval. Local modifications and unmanaged files are
 preserved. See the [changelog](CHANGELOG.md) for release history.
+
+New workspaces use manifest schema version 2 with a required source commit.
+The current validator also accepts version 1 manifests so existing workspaces
+can migrate without inventing missing historical provenance.
 
 ## Validation tiers
 
