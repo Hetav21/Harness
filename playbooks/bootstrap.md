@@ -128,6 +128,12 @@ Install shared content first in the plan, then adapter outputs. The canonical
    filesystem-resolution check plus live `/skills` discovery when an
    authenticated session is available.
 
+For selected instruction modules, plan to embed their portable policy in the
+generated shared `AGENTS.md`, including `core/instructions/engineering.md` when
+selected. Do not copy the distribution's bootstrap or release-maintenance
+instructions into project policy, or leave links that depend on retaining the
+starter checkout. Record the selected source modules and output ownership.
+
 **Required output:** the completed table, conflict decisions, selected-only
    source list, and predicted manifest entries. Existing unmanaged files must
    remain explicitly untouched; they cannot be overwritten or adopted silently.
@@ -174,6 +180,10 @@ Run offline checks first: source portability, frontmatter/config syntax,
    sessions. Then run live checks only when the human has an authenticated
    session and has requested them. Never inspect cached credentials and never
    perform login, MFA, token refresh, or role selection for the user.
+
+Check that generated instruction entrypoints contain the selected policy and
+that their required imports and links resolve within the retained workspace,
+independently of the starter checkout.
 
 Report each check as exactly one of **passed**, **failed**, **skipped**, or
    **blocked**, with command/evidence and result. Missing client binaries or an

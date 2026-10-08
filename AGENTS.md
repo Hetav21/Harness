@@ -9,6 +9,19 @@ Read `playbooks/bootstrap.md`, perform its preflight and interview, present the 
 ## Upgrade entrypoint
 When the user requests an update, read `playbooks/upgrade.md`, the target release migrations, and the workspace manifest before proposing changes.
 
+## Distribution release checklist
+
+For changes to this source distribution, assess release impact before committing
+and report the decision. This is separate from upgrading a generated workspace.
+
+- Record notable changes in `CHANGELOG.md`; use an `Unreleased` section when a release is deferred.
+- When releasing, update `VERSION`, date the changelog entry, and align current-release references in examples. Preserve historical release entries and migrations.
+- Use a patch release for compatible policy corrections, a minor release for new capabilities, and explicitly assess compatibility for breaking changes.
+- Add `migrations/<previous>-to-<next>.md` for every release, even if it only explains that no generated files change. Keep the migration chain contiguous and describe scope, ownership, validation, and rollback.
+- Change schema and adapter versions only when their contracts change.
+- Verify release metadata, example syntax/schema, migration continuity, and selected instruction entrypoints; report skipped live checks separately.
+- When publication is authorized, commit the validated release and publish its matching `v<VERSION>` tag. Never move an existing release tag; verify the remote branch and tag after pushing.
+
 ## Invariants
 - Treat `core/` and `catalog/` as portable source material.
 - Treat `adapters/` as client-specific translation layers.

@@ -1,7 +1,7 @@
 schema-version: 1
 template:
   repository: owner/agent-workspace-template
-  release: v0.1.0
+  release: v0.1.1
 installed:
   clients:
     - id: claude-code
@@ -18,7 +18,7 @@ installed:
       capabilities: [skills]
   modules:
     - id: workspace-router
-      source-release: v0.1.0
+      source-release: v0.1.1
 outputs:
   - path: AGENTS.md
     owner: shared-core
