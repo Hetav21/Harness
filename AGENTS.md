@@ -18,6 +18,10 @@ When the user requests an update, read `playbooks/upgrade.md`, the target releas
 
 ## Engineering behavior
 
+Read and follow [the shared engineering policy](core/instructions/engineering.md)
+when working on this distribution. Use it as the source for generated
+engineering instructions when that module is selected.
+
 Adapted from [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills). These guidelines favor caution over speed; use judgment for trivial tasks.
 
 ### Think before coding
