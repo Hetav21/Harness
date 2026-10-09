@@ -16,11 +16,12 @@ capabilities:
     skills: supported
     mcp: conditional
     hooks: conditional
-  role-metadata: purpose, scope, inputs, outputs, validation ownership, escalation conditions
+  role-metadata: purpose, allowed scope, denied scope, inputs, outputs, validation ownership, escalation conditions, capability requirements
   roles: register selected roles with agents.<name>.description and config_file; put the role contract in developer_instructions in the referenced TOML layer
   mcp: configure only through selected project-safe settings; examples are inert
 validation:
   offline:
+    - verify rendered roles preserve every field of core/roles/ROLE-CONTRACT.md
     - validate rendered config and role TOML against the native Codex configuration schema
     - codex --version
     - codex --help

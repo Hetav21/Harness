@@ -20,10 +20,11 @@ capabilities:
     mcp: conditional
     hooks: conditional
     plugins: conditional
-  role-metadata: purpose, scope, inputs, outputs, validation ownership, escalation conditions
+  role-metadata: purpose, allowed scope, denied scope, inputs, outputs, validation ownership, escalation conditions, capability requirements
   mcp: inert example only; use environment-variable names, never credentials
 validation:
   offline:
+    - verify rendered roles preserve every field of core/roles/ROLE-CONTRACT.md
     - agy --help
     - agy plugin list (optional when the local profile is initialized)
   live:

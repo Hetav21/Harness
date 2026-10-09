@@ -4,6 +4,7 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Preserved explicit denied scope and capability requirements in all four role templates, with adapter checks against the complete shared role contract.
 - Allowed verified workspace routes to proceed without an applicable specialized skill, while retaining checks for missing selected skills and aligning the repository-table reference with the context worksheet.
 - Corrected Codex MCP settings and role registration/configuration layers to use the native schema; the Codex adapter is now version 2.
 - Added manifest schema version 3 with source-module paths on generated outputs; legacy versions 1 and 2 remain readable, with explicit attribution required before conversion.

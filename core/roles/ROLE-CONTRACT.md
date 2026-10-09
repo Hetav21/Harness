@@ -17,3 +17,11 @@ any client-specific representation:
 Roles must not invent permissions, project facts, credentials, or tool names.
 Client adapters may translate this contract into native metadata, but may not
 expand the allowed scope or remove denied scope.
+
+When rendering a role, populate every field from its approved definition.
+`{{SCOPE}}` represents allowed scope; retain denied scope and capability
+requirements in their own sections. Verify that the rendered role preserves
+all fields and that the selected client provides its required capabilities.
+Missing capabilities block that role; do not silently broaden its permissions.
+Where supported, align native permission controls with the approved scope.
+Role instructions alone do not enforce tool permissions.

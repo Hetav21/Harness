@@ -7,8 +7,10 @@ description: {{ROLE_DESCRIPTION}}
 
 ## Purpose
 {{PURPOSE}}
-## Scope
+## Allowed scope
 {{SCOPE}}
+## Denied scope
+{{DENIED_SCOPE}}
 ## Inputs
 {{INPUTS}}
 ## Outputs
@@ -17,3 +19,5 @@ description: {{ROLE_DESCRIPTION}}
 {{VALIDATION_OWNERSHIP}}
 ## Escalation conditions
 {{ESCALATION_CONDITIONS}}
+## Capability requirements
+{{CAPABILITY_REQUIREMENTS}}

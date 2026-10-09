@@ -21,10 +21,11 @@ capabilities:
     relative-skill-links: conditional
     mcp: conditional
     hooks: conditional
-  role-metadata: purpose, scope, inputs, outputs, validation ownership, escalation conditions
+  role-metadata: purpose, allowed scope, denied scope, inputs, outputs, validation ownership, escalation conditions, capability requirements
   mcp: inert example only; enable explicitly with environment-variable configuration
 validation:
   offline:
+    - verify rendered roles preserve every field of core/roles/ROLE-CONTRACT.md
     - claude --version
     - claude --help
     - filesystem resolution of relative skill links

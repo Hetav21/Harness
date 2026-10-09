@@ -17,10 +17,11 @@ capabilities:
     skills: supported
     mcp: conditional
     plugins: conditional
-  role-metadata: purpose, scope, inputs, outputs, validation ownership, escalation conditions
+  role-metadata: purpose, allowed scope, denied scope, inputs, outputs, validation ownership, escalation conditions, capability requirements
   mcp: inert configuration example; activate only with approved environment variables
 validation:
   offline:
+    - verify rendered roles preserve every field of core/roles/ROLE-CONTRACT.md
     - opencode --version
     - opencode --help
     - opencode2 --help (optional when installed)
