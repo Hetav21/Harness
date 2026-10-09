@@ -5,7 +5,7 @@
   "additionalProperties": false,
   "required": ["schema-version", "template", "installed", "outputs", "project-context", "applied-migrations", "warnings", "validation"],
   "properties": {
-    "schema-version": { "enum": [1, 2] },
+    "schema-version": { "enum": [1, 2, 3] },
     "template": {
       "type": "object", "additionalProperties": false, "required": ["repository", "release"],
       "properties": {
@@ -32,6 +32,7 @@
       "properties": {
         "path": { "type": "string", "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$)).+" }, "owner": { "type": "string", "minLength": 1 },
         "update-policy": { "type": "string", "enum": ["replace-if-unmodified", "replace-link-if-unmodified", "merge", "user-owned", "remove-if-unmodified"] },
+        "source-modules": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 }, "description": "Contributing source file paths relative to the template checkout." },
         "content-hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }, "link-target": { "type": "string", "pattern": "^(?!/)(?![A-Za-z]:).+" }
       },
       "oneOf": [
@@ -62,8 +63,14 @@
     }
   },
   "allOf": [{
-    "if": { "properties": { "schema-version": { "const": 2 } } },
+    "if": { "properties": { "schema-version": { "enum": [2, 3] } } },
     "then": { "properties": { "template": { "required": ["commit"] } } },
     "else": { "properties": { "template": { "not": { "required": ["commit"] } } } }
+  }, {
+    "if": { "properties": { "schema-version": { "const": 3 } } },
+    "then": { "properties": { "outputs": { "items": { "anyOf": [
+      { "required": ["source-modules"] },
+      { "properties": { "update-policy": { "const": "user-owned" } } }
+    ] } } } }
   }]
 }

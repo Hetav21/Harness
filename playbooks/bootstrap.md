@@ -139,6 +139,11 @@ generated shared `AGENTS.md`, including `core/instructions/engineering.md` when
 selected. Do not copy the distribution's bootstrap or release-maintenance
 instructions into project policy, or leave links that depend on retaining the
 starter checkout. Record the selected source modules and output ownership.
+For each generated file or link, record its contributing source file paths in
+`outputs[].source-modules`, relative to the template checkout. Include every
+contributing module or adapter template; for shared `AGENTS.md`, include the
+selected instruction modules and this playbook's lifecycle section. Verify
+these paths against the selected source before materialization.
 
 Plan this lifecycle section in the generated shared `AGENTS.md`, pointing to
 the manifest at the workspace root. Include both files in the approved output
@@ -231,10 +236,10 @@ Skipped checks are not passed.
 ## Manifest
 
 Write `.agent-template/manifest.yaml` only after required validation completes.
-   Use schema version 2. Record the verified credential-free clone URL in
+   Use schema version 3. Record the verified credential-free clone URL in
    `template.repository`, the tag in `template.release`, and the full commit ID
    in `template.commit`. Record selected clients and capabilities, source
-   modules, output owners, update policies, content hashes/link targets,
+   modules, each output's `source-modules`, owners, update policies, content hashes/link targets,
    project-context reference, applied migrations, validation results, warnings,
    skips, and blocks. Do not claim skipped or blocked checks as passed.
 

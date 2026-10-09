@@ -98,9 +98,11 @@ classifies managed and unmanaged changes, presents a new complete plan, and
 waits for explicit approval. Local modifications and unmanaged files are
 preserved. See the [changelog](CHANGELOG.md) for release history.
 
-New workspaces use manifest schema version 2 with a required source commit.
-The current validator also accepts version 1 manifests so existing workspaces
-can migrate without inventing missing historical provenance.
+New workspaces use manifest schema version 3 with a required source commit and
+`source-modules` on each generated output. These lists identify contributing
+source files so upgrades can find affected outputs without guessing. The
+validator also accepts versions 1 and 2; legacy source mappings must be verified
+before conversion, while user-owned files need no source attribution.
 
 ## Validation tiers
 

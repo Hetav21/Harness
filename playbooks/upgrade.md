@@ -35,10 +35,19 @@ migrations. A missing, malformed, or ambiguous manifest stops the upgrade and
 produces a rollback report without changing files. Preserve any pre-existing
 partial-run marker and its recorded backup location.
 
-The target schema accepts legacy version 1 and current version 2 manifests.
-Version 2 requires `template.commit`; version 1 does not prove the original
+The target schema accepts legacy versions 1 and 2 and current version 3 manifests.
+Versions 2 and 3 require `template.commit`; version 1 does not prove the original
 source commit. Do not invent that historical value. The migration records the
 verified target commit only after the approved upgrade succeeds.
+
+Version 3 also requires `source-modules` on generated outputs. Each entry is a
+contributing file path relative to the template checkout, not an output path.
+Use these lists to locate outputs affected by a changed module or adapter.
+For older manifests, recover mappings only from retained generation evidence
+or an explicitly reviewed mapping supplied by the user. Never infer ownership
+from a filename. Unresolved mappings block conversion to version 3; preserve
+the existing manifest until all generated outputs can be attributed. User-owned
+outputs need no source attribution and remain untouched.
 
 ## Release range resolution
 
@@ -136,8 +145,8 @@ check prevents completion and triggers rollback handling.
 ## Manifest update
 
 Only after validation, and only after all required validation passes, update the manifest atomically with
-schema version 2, the verified source clone URL, target release and full commit,
-current hashes/link targets, warnings, selected
+schema version 3, the verified source clone URL, target release and full commit,
+each generated output's verified source-module list, current hashes/link targets, warnings, selected
 clients/modules, and applied migration IDs. Retain conflict, skipped, and
 blocked warnings; do not convert them to passes. If validation fails, leave the
 old release, hashes, warnings, and migration history authoritative and do not

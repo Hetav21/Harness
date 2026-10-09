@@ -1,5 +1,5 @@
 # Inert example: replace the repository, commit, and content hashes with verified values.
-schema-version: 2
+schema-version: 3
 template:
   repository: https://example.org/owner/agent-workspace-template.git
   release: v0.2.0
@@ -19,19 +19,24 @@ installed:
       adapter-version: 1
       capabilities: [skills]
   modules:
+    - id: engineering
+      source-release: v0.2.0
     - id: workspace-router
       source-release: v0.2.0
 outputs:
   - path: AGENTS.md
     owner: shared-core
+    source-modules: [core/instructions/engineering.md, playbooks/bootstrap.md]
     content-hash: sha256:0000000000000000000000000000000000000000000000000000000000000000
     update-policy: merge
   - path: .agents/skills/workspace-router/SKILL.md
     owner: shared-core
+    source-modules: [catalog/skills/workspace-router/SKILL.md]
     content-hash: sha256:1111111111111111111111111111111111111111111111111111111111111111
     update-policy: replace-if-unmodified
   - path: .claude/skills/workspace-router
     owner: claude-code-adapter
+    source-modules: [catalog/skills/workspace-router/SKILL.md, adapters/claude-code/adapter.yaml]
     link-target: ../../.agents/skills/workspace-router
     update-policy: replace-link-if-unmodified
 project-context: .agent-template/project-context.md
