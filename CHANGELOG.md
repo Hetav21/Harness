@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented here.
 
+## Unreleased
+
+- Fixed the Antigravity role template to include its required name and description frontmatter.
+
 ## 0.2.0 - 2026-10-09
 
 - Added a manifest-based update handoff to generated `AGENTS.md` so the starter checkout can be removed without losing upgrade discovery.
