@@ -4,6 +4,7 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Corrected Codex MCP settings and role registration/configuration layers to use the native schema; the Codex adapter is now version 2.
 - Added manifest schema version 3 with source-module paths on generated outputs; legacy versions 1 and 2 remain readable, with explicit attribution required before conversion.
 - Fixed the Antigravity role template to include its required name and description frontmatter.
 

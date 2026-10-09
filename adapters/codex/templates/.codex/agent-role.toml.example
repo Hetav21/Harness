@@ -1,8 +1,17 @@
-# Neutral role contract mapped to Codex metadata.
-name = "{{ROLE_NAME}}"
-purpose = "{{PURPOSE}}"
-scope = "{{SCOPE}}"
-inputs = "{{INPUTS}}"
-outputs = "{{OUTPUTS}}"
-validation_ownership = "{{VALIDATION_OWNERSHIP}}"
-escalation_conditions = "{{ESCALATION_CONDITIONS}}"
+# Write to .codex/<role-name>.toml and reference it from config.toml.
+developer_instructions = """
+# {{ROLE_NAME}}
+
+## Purpose
+{{PURPOSE}}
+## Scope
+{{SCOPE}}
+## Inputs
+{{INPUTS}}
+## Outputs
+{{OUTPUTS}}
+## Validation ownership
+{{VALIDATION_OWNERSHIP}}
+## Escalation conditions
+{{ESCALATION_CONDITIONS}}
+"""

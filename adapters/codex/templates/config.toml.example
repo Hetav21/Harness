@@ -1,8 +1,11 @@
-# Project-safe Codex settings example. No credentials are included.
-[project]
-skills = ".agents/skills"
+# Materialize only selected sections and resolve placeholders from verified inputs.
+# Skills are discovered from .agents/skills without a config entry.
 
-[mcp.example]
+[mcp_servers.example]
 enabled = false
-command = "${MCP_COMMAND}"
-args = ["${MCP_ARGUMENT}"]
+command = "{{MCP_COMMAND}}"
+args = ["{{MCP_ARGUMENT}}"]
+
+[agents."{{ROLE_NAME}}"]
+description = "{{ROLE_DESCRIPTION}}"
+config_file = "{{ROLE_NAME}}.toml"

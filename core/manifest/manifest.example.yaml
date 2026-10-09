@@ -10,7 +10,7 @@ installed:
       adapter-version: 1
       capabilities: [skills, relative-skill-links]
     - id: codex
-      adapter-version: 1
+      adapter-version: 2
       capabilities: [skills]
     - id: opencode
       adapter-version: 1

@@ -1,5 +1,6 @@
 schema-version: 1
 id: codex
+adapter-version: 2
 display-name: Codex
 supported-template-major: 0
 instructions:
@@ -10,14 +11,17 @@ skills:
 capabilities:
   outputs:
     - .codex/config.toml
+    - .codex/ROLE_NAME.toml
   statuses:
     skills: supported
     mcp: conditional
     hooks: conditional
   role-metadata: purpose, scope, inputs, outputs, validation ownership, escalation conditions
+  roles: register selected roles with agents.<name>.description and config_file; put the role contract in developer_instructions in the referenced TOML layer
   mcp: configure only through selected project-safe settings; examples are inert
 validation:
   offline:
+    - validate rendered config and role TOML against the native Codex configuration schema
     - codex --version
     - codex --help
     - codex doctor
