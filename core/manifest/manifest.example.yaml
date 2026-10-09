@@ -2,7 +2,7 @@
 schema-version: 3
 template:
   repository: https://example.org/owner/agent-workspace-template.git
-  release: v0.2.0
+  release: v0.3.0
   commit: "0000000000000000000000000000000000000000"
 installed:
   clients:
@@ -20,9 +20,9 @@ installed:
       capabilities: [skills]
   modules:
     - id: engineering
-      source-release: v0.2.0
+      source-release: v0.3.0
     - id: workspace-router
-      source-release: v0.2.0
+      source-release: v0.3.0
 outputs:
   - path: AGENTS.md
     owner: shared-core

@@ -2,14 +2,15 @@
 
 All notable changes to this project are documented here.
 
-## Unreleased
+## 0.3.0 - 2026-10-09
 
-- Required shared filesystem checks before bootstrap and upgrade writes to reject duplicate destinations, path traversal, and symlink escapes, including manifest and project-context paths.
-- Preserved explicit denied scope and capability requirements in all four role templates, with adapter checks against the complete shared role contract.
-- Allowed verified workspace routes to proceed without an applicable specialized skill, while retaining checks for missing selected skills and aligning the repository-table reference with the context worksheet.
-- Corrected Codex MCP settings and role registration/configuration layers to use the native schema; the Codex adapter is now version 2.
-- Added manifest schema version 3 with source-module paths on generated outputs; legacy versions 1 and 2 remain readable, with explicit attribution required before conversion.
-- Fixed the Antigravity role template to include its required name and description frontmatter.
+- Added manifest schema version 3 with mandatory source-to-output mapping (`source-modules`) on generated outputs; retained backward compatibility for reading legacy version 1 and version 2 manifests.
+- Corrected OpenAI Codex MCP settings and role registration/configuration layers to conform to the native schema, advancing the Codex adapter contract to version 2.
+- Required shared filesystem path checks before bootstrap and upgrade writes to reject duplicate destinations, path traversal (`..`), and symlink escapes, including manifest and project-context paths.
+- Preserved explicit denied scope and capability requirements across all role templates (Claude Code, Codex, OpenCode, and Antigravity) in accordance with the shared role contract.
+- Added required YAML frontmatter (`name` and `description`) to the Google Antigravity role template.
+- Allowed verified workspace routes to proceed with `SKILL: none` when a repository is known but lacks an applicable specialized skill, and aligned repository table references with the context worksheet.
+- Added a contiguous upgrade migration (`0.2.0-to-0.3.0.md`) covering schema v3 attribution, path checks, Codex adapter v2, and rollback procedures.
 
 ## 0.2.0 - 2026-10-09
 

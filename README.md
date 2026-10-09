@@ -1,4 +1,14 @@
-# Generic Agent Workspace Template
+# ⚡ Harness
+
+> **Production-grade governance for AI coding agents across complex codebases.**
+>
+> *A client-agnostic governance framework to bootstrap, orchestrate, and reliably upgrade multi-repository workspaces.*
+
+[![Release](https://img.shields.io/badge/release-v0.3.0-blue.svg)](VERSION)
+[![Specification](https://img.shields.io/badge/skills-agentskills.io-6366f1.svg)](https://agentskills.io/specification)
+[![Compatibility](https://img.shields.io/badge/adapters-Claude%20|%20Codex%20|%20OpenCode%20|%20Antigravity-success.svg)](adapters/)
+
+**Harness** is a portable, client-agnostic starter and governance framework designed to bootstrap and manage multi-repository agent workspaces. It combines portable instructions, role boundaries, canonical [Agent Skills](https://agentskills.io/specification), verifiable manifest-based provenance tracking, and native client adapters for **Claude Code**, **OpenAI Codex**, **OpenCode**, and **Google Antigravity**.
 
 ## What this is
 
