@@ -47,15 +47,20 @@ OWNER: <owner-or-UNKNOWN>
 DEPENDENCIES: <dependencies-or-UNKNOWN>
 ENTRY_POINT: <entry-point-or-UNKNOWN>
 EVIDENCE: <verified-context-path-and-table-or-UNKNOWN>
-SKILL: <verified-narrower-skill-or-UNKNOWN>
+SKILL: <verified-narrower-skill|none|UNKNOWN>
 STATUS: <READY|BLOCKED|UNKNOWN>
 ```
 
 `BLOCKED/UNKNOWN` means routing cannot safely proceed. Explain the missing, stale, conflicting, or unverifiable evidence in one brief line. Never guess.
 
+Use `SKILL: none` when the verified Skill Routing Plan has no applicable narrower
+skill. This does not prevent `READY` when the repository route is otherwise
+verified. Use `UNKNOWN` when skill selection cannot be established; a named
+skill that is missing or invalid is not equivalent to no applicable skill.
+
 ## Ownership Map
 
-Read authoritative `Product and Ownership`, `Repository Inventory`, and `Runnable and Context-Only Code` in `{{PROJECT_CONTEXT_PATH}}`; PROJECT-CONTEXT remains the source and must not be copied here. Verify cited paths/evidence, freshness, and authority. Outputs: `OWNER`, `COMPONENT`.
+Read authoritative `Product and Ownership`, `Repositories`, and `Runnable and Context-Only Code` in `{{PROJECT_CONTEXT_PATH}}`; PROJECT-CONTEXT remains the source and must not be copied here. Verify cited paths/evidence, freshness, and authority. Outputs: `OWNER`, `COMPONENT`.
 
 ## Shared Dependencies
 
@@ -76,20 +81,20 @@ Read authoritative `Runnable and Context-Only Code` and `Local Setup and Run Com
 3. Apply `{{FRESHNESS_POLICY}}`, `{{AUTHORITY_POLICY}}`, and `{{CONFLICT_POLICY}}` to the cited evidence. Verify every referenced path and the evidence supporting the route. Escalate conflicts to `{{CONTEXT_CONFLICT_OWNER}}`.
 4. Use the worksheet tables to produce repository, component, contract, owner, `DEPENDENCIES`, and `ENTRY_POINT` outputs. Mark absent or conflicting results `UNKNOWN` or `BLOCKED`; do not diagnose before routing.
 5. Distinguish runnable from context-only repositories; context-only repositories may provide evidence but are never execution targets.
-6. Verify the selected narrower skill exists and is applicable; load it only after routing is `READY`.
+6. Consult the verified Skill Routing Plan. If a narrower skill applies, verify it exists and is applicable; load it only after routing is `READY`. If none applies, return `SKILL: none` and use the repository's instructions for the task.
 7. Return the route-result format above. Keep evidence references concise.
 
 ## Stop Conditions
 
-Stop with `STATUS: BLOCKED` or `STATUS: UNKNOWN` when the context path is missing, a cited path does not exist, evidence is stale or lacks authority, policy is unresolved, authorized evidence conflicts, the result is context-only, the contract remains unclear, or the narrower skill cannot be verified. Ask for evidence or follow the configured conflict policy; never invent paths, owners, contracts, branches, endpoints, or skills.
+Stop with `STATUS: BLOCKED` or `STATUS: UNKNOWN` when the context path is missing, a cited path does not exist, evidence is stale or lacks authority, policy is unresolved, authorized evidence conflicts, the result is context-only, the contract remains unclear, or a selected narrower skill cannot be verified. Ask for evidence or follow the configured conflict policy; never invent paths, owners, contracts, branches, endpoints, or skills.
 
 ## Verification
 
-Verify the context path, cited evidence paths, freshness, authority, and conflict policy before `READY`. Verify the repository is runnable, contract, owner, dependencies, and entry point are evidenced, and the narrower skill applies.
+Verify the context path, cited evidence paths, freshness, authority, and conflict policy before `READY`. Verify the repository is runnable, contract, owner, dependencies, and entry point are evidenced. Verify any selected narrower skill; otherwise confirm that the Skill Routing Plan has no applicable entry before returning `SKILL: none`.
 
 ## Related Skills
 
-Only the verified narrower skill selected by the authoritative context is related to this route. Do not invent or list project skills here; load the selected skill only after routing is `READY`.
+When a narrower skill is selected, only that verified skill is related to this route. Do not invent or list project skills here; load the selected skill only after routing is `READY`. A route with `SKILL: none` needs no related skill.
 
 ## Maintenance Triggers
 
@@ -98,6 +103,7 @@ Update this template only when routing behavior or activation configuration chan
 ## Common Mistakes
 
 - Treating repository, component, contract, or owner as required runtime input.
+- Blocking an otherwise verified route because no narrower skill applies, or using `none` to bypass a missing or invalid selected skill.
 - Routing from names, intuition, stale evidence, or unverifiable paths.
 - Treating context-only repositories as execution targets, diagnosing before routing, or loading skills before verification.
 - Guessing missing owners, contracts, branches, endpoints, paths, or skills.
