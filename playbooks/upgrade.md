@@ -11,6 +11,10 @@ identifies its owner, update policy, and content hash or link target. Unmanaged 
 
 ## Source retrieval
 
+Verify the workspace root and retained manifest location using the
+[workspace path checks](../core/manifest/PATH-CHECKS.md) before reading the
+manifest or following its references.
+
 The generated workspace `AGENTS.md` directs update requests to the retained
 `.agent-template/manifest.yaml`. Use its `template.repository` to retrieve a
 target tagged release into a temporary directory outside managed output paths;
@@ -29,9 +33,11 @@ blocks retrieval and must be reported without changing the workspace.
 ## Manifest read
 
 Read `.agent-template/manifest.yaml` and validate its schema before reading or
-applying migrations. Record the installed release, selected clients, selected
-modules, output ownership, policies, hashes/link targets, warnings, and applied
-migrations. A missing, malformed, or ambiguous manifest stops the upgrade and
+applying migrations. Apply the workspace path checks to all recorded paths
+before reading managed file contents; schema validity alone does not establish
+unambiguous ownership or containment. Record the installed release, selected
+clients, selected modules, output ownership, policies, hashes/link targets,
+warnings, and applied migrations. A missing, malformed, or ambiguous manifest stops the upgrade and
 produces a rollback report without changing files. Preserve any pre-existing
 partial-run marker and its recorded backup location.
 
@@ -112,13 +118,16 @@ action, source, expected hash/link target, conflicts, warnings, backups, and
 offline/live validation. The plan must explicitly describe clean replacement,
 semantic merge, symlink-target update, obsolete-file removal, preserved
 conflicts, and filtered selections. Obtain explicit user approval immediately
-before apply. Approval is not implied by the manifest, prior bootstrap, or a
+before apply, after the complete plan passes the workspace path checks,
+including manifest, project-context, backup, and run-record destinations.
+Approval is not implied by the manifest, prior bootstrap, or a
 previous plan. If the working tree or manifest changes after approval, stop and
 re-plan.
 
 ## Apply
 
-After approval, create a pre-upgrade copy of every path that may change and a
+After approval, repeat the workspace path checks before any writes, then
+create a pre-upgrade copy of every path that may change and a
 durable run record containing the plan, manifest version, and completed step.
 Apply only approved clean replacements, approved link updates, reviewed
 semantic merges, and clean obsolete-file removals. Write shared/core outputs

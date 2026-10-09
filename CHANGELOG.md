@@ -4,6 +4,7 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Required shared filesystem checks before bootstrap and upgrade writes to reject duplicate destinations, path traversal, and symlink escapes, including manifest and project-context paths.
 - Preserved explicit denied scope and capability requirements in all four role templates, with adapter checks against the complete shared role contract.
 - Allowed verified workspace routes to proceed without an applicable specialized skill, while retaining checks for missing selected skills and aligning the repository-table reference with the context worksheet.
 - Corrected Codex MCP settings and role registration/configuration layers to use the native schema; the Codex adapter is now version 2.

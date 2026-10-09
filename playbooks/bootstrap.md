@@ -19,6 +19,9 @@ Get explicit user approval immediately before file changes.
    OpenCode, and Antigravity), but do not assume the current client is the
    only target. A detected client is evidence of availability, not consent to
    install its adapter.
+   Apply the [workspace path checks](../core/manifest/PATH-CHECKS.md) to any
+   existing manifest location before reading it and to its recorded paths
+   before accessing managed file contents.
 2. Inventory existing instruction, skill, agent, MCP, hook, and settings files,
    including native paths and `.agents/skills`. Record whether each is managed
    by an existing `.agent-template/manifest.yaml`, clearly unmanaged, or
@@ -119,7 +122,10 @@ For each selected client, present only capabilities supported by its adapter,
 
 Build the complete plan before changing any generated workspace file. Include
    every selected output and every conflict, including files that will remain
-   untouched. Use this exact table schema:
+   untouched. Apply the [workspace path checks](../core/manifest/PATH-CHECKS.md)
+   to the full plan, including the retained manifest and project context.
+   Resolve duplicate destinations and containment failures before approval.
+   Use this exact table schema:
 
 | Path | Action | Source module | Owning adapter | Existing state | Update policy | Validation |
 |---|---|---|---|---|---|---|
@@ -189,7 +195,8 @@ table, conflicts, warnings, and validation tiers. State exactly which files may
 **Agent actions**
 
 After approval, re-check that the working tree and ownership inventory still
-   match the plan. Materialize selected shared content first, including
+   match the plan and repeat the workspace path checks before any writes.
+   Materialize selected shared content first, including
    `.agents/skills`, then materialize selected adapter outputs. Resolve and
    record relative Claude skill links. Generate only selected clients and
    capabilities. Do not overwrite unmanaged or newly modified files; pause and
